@@ -309,6 +309,11 @@ class Navigationd:
       "activeLaneAtRoadEdge": active_lane_at_road_edge,
       "hasSharedSameSideLane": has_shared_same_side_lane,
       "sameSideLaneCount": same_side_lane_count,
+      "lanes": [
+        {"directions": [str(direction) for direction in (lane.get("directions") or []) if direction],
+         "active": bool(lane.get("active", False))}
+        for lane in lanes if isinstance(lane, dict)
+      ],
       "maneuverPrimaryText": str(payload.get("maneuverPrimaryText") or ""),
       "maneuverSecondaryText": str(payload.get("maneuverSecondaryText") or ""),
       "maneuverDistance": float(payload.get("maneuverDistance") or 0.0),
